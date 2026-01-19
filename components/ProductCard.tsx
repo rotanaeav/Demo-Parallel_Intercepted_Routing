@@ -1,13 +1,17 @@
+
+
 import { Product } from "@/lib/type/product"
 import Image from "next/image"
 import { Badge } from "./ui/badge"
 
 
 export function ProductCard({ product }: { product: Product }   ) {
-  const mainImage = product.images[0]
-
+  const mainImage = product.images?.[0];
+    if(!mainImage.startsWith('https://')){
+        return null
+    }
   return (
-<div className="group flex h-full flex-col overflow-hidden rounded-lg border border-border bg-card transition-shadow duration-300 hover:shadow-lg">
+    <div className="group flex h-full flex-col overflow-hidden rounded-lg border border-border bg-card transition-shadow duration-300 hover:shadow-lg">
       <div className="relative aspect-square overflow-hidden bg-muted">
         <Image
           src={mainImage || '/placeholder.svg'}
